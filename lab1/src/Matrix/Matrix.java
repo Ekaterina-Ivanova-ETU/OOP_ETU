@@ -1,5 +1,8 @@
 package Matrix;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Matrix {
     private final double[][] matrix;
     public final int rows;
@@ -29,14 +32,13 @@ public class Matrix {
         matrix[row][column] = value;
     }
 
-    private int getRows() {
+    public int getRows() {
         return rows;
     }
-    private int getColumns() {
+
+    public int getColumns() {
         return columns;
     }
-
-    public String getSizeMatrix () { return (String.valueOf(getRows()) + " x " + String.valueOf(getColumns())); }
 
     public Matrix addition(Matrix addMatrix) {
         if (addMatrix == null)
@@ -160,6 +162,18 @@ public class Matrix {
         }
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        for(int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                result +=  31 * result + (int) matrix[i][j];
+            }
+        }
+
+        return result;
     }
 
     @Override

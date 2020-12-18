@@ -27,7 +27,7 @@ public class Checking {
 
         Matrix C = A.multiplication(B);
         out.println("C = A * B =\n" + C.toString());
-        out.println("Size C: " + C.getSizeMatrix());
+        out.println("Size C: " + C.getRows() + " x " + C.getColumns());
         out.println("C(2, 2) = " + C.get(2, 2));
         out.println("det|C| = " + C.determinant() + "\n");
 
