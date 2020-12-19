@@ -12,6 +12,14 @@ public class Rectangle implements Shape {
         this.height = height;
     }
 
+    public double getLength() {
+        return length;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
     @Override
     public double calcArea() { return length * height; }
 
