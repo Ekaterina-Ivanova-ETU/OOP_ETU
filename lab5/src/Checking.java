@@ -20,9 +20,11 @@ public class Checking {
         shapes.add(new Triangle(4, 6, 7));
 
         StoreFile<Shape> storeShapes = new StoreShapes("shapes.json");
+
         storeShapes.WriteToFile(shapes);
 
         List<Shape> listShapesFromFile = storeShapes.ReadFromFile();
+
         System.out.print("Shapes read from the file:\n");
         listShapesFromFile.forEach(System.out::print);
     }
