@@ -1,6 +1,8 @@
 package Contacts;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PhoneBook {
     private  ArrayList<Contact> contacts;
@@ -108,16 +110,8 @@ public class PhoneBook {
         contacts.get(i).setAllPhoneNumber(numbers);
     }
 
-    public String find(String findString) {
-        StringBuilder finsContacts = new StringBuilder();
-
-        contacts.stream().filter(x-> x.checkContact(findString)).forEach(finsContacts::append);
-
-        if (finsContacts.toString().isEmpty()) {
-            return "No contacts with the specified substring were found.\n";
-        } else {
-            return finsContacts.toString();
-        }
+    public List<Contact> find(String findString) {
+          return contacts.stream().filter(x-> x.checkContact(findString)).collect(Collectors.toList());
     }
 
     @Override
