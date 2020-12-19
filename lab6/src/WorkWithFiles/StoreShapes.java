@@ -17,27 +17,23 @@ public class StoreShapes implements StoreFile<Shape> {
     }
 
     public void WriteToFile(List<Shape> shapes) throws IOException {
-        try {
-            Writer writer = new FileWriter(filePath, false);
+        try (Writer writer = new FileWriter(filePath, false)) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Type type = new TypeToken<List<Shape>>() {}.getType();
             gsonBuilder.registerTypeAdapter(Shape.class, new JSONObjectAdapter());
             gsonBuilder.create().toJson(shapes, type, writer);
             writer.flush();
-            writer.close();
         } catch (IOException e) {
             throw new IOException("Error writing data to file.");
         }
     }
 
     public List<Shape> ReadFromFile() throws IOException {
-        try {
-            FileReader reader = new FileReader(filePath);
+        try (FileReader reader = new FileReader(filePath)) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Type type = new TypeToken<List<Shape>>() {}.getType();
             gsonBuilder.registerTypeAdapter(Shape.class, new JSONObjectAdapter());
             List<Shape> shapes = gsonBuilder.create().fromJson(reader, type);
-            reader.close();
             return shapes != null ? shapes : Collections.emptyList();
         } catch (IOException e) {
             throw new IOException("Error reading data from a file.");
