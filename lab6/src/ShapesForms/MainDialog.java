@@ -70,6 +70,14 @@ public class MainDialog extends JDialog {
             if (index >= 0 && index + 1 < defaultListModel.size()) {
                 Shape temp = defaultListModel.set(index + 1, defaultListModel.get(index));
                 defaultListModel.set(index, temp);
+
+                List<Shape> updatedShapes = new ArrayList<>();
+                Arrays.stream(defaultListModel.toArray()).forEach(element -> updatedShapes.add((Shape) element));
+                try {
+                    shapeStoreFile.WriteToFile(updatedShapes);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
             }
         });
 
@@ -78,50 +86,95 @@ public class MainDialog extends JDialog {
             if (index >= 1 && index < defaultListModel.size()) {
                 Shape temp = defaultListModel.set(index - 1, defaultListModel.get(index));
                 defaultListModel.set(index, temp);
+
+                List<Shape> updatedShapes = new ArrayList<>();
+                Arrays.stream(defaultListModel.toArray()).forEach(element -> updatedShapes.add((Shape) element));
+                try {
+                    shapeStoreFile.WriteToFile(updatedShapes);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
             }
         });
 
         removeButton.addActionListener(e -> {
             if (shapesList.getSelectedIndex() != -1) {
                 defaultListModel.remove(shapesList.getSelectedIndex());
-            }
-        });
 
-        createCircleButton.addActionListener(e -> {
-            CircleDialog circleDialog = new CircleDialog(defaultListModel::addElement);
-            circleDialog.setVisible(true);
-        });
-
-        createSquareButton.addActionListener(e -> {
-            SquareDialog squareDialog = new SquareDialog(defaultListModel::addElement);
-            squareDialog.setVisible(true);
-        });
-
-        createRectangleButton.addActionListener(e -> {
-            RectangleDialog rectangleDialog = new RectangleDialog(defaultListModel::addElement);
-            rectangleDialog.setVisible(true);
-        });
-
-        createTriangleButton.addActionListener(e -> {
-            TriangleDialog triangleDialog = new TriangleDialog(defaultListModel::addElement);
-            triangleDialog.setVisible(true);
-        });
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
                 List<Shape> updatedShapes = new ArrayList<>();
                 Arrays.stream(defaultListModel.toArray()).forEach(element -> updatedShapes.add((Shape) element));
-
                 try {
                     shapeStoreFile.WriteToFile(updatedShapes);
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }
-
-                e.getWindow().dispose();
             }
         });
+
+        createCircleButton.addActionListener(e -> {
+            CircleDialog circleDialog = new CircleDialog(shape -> {
+                defaultListModel.addElement(shape);
+
+                List<Shape> updatedShapes = new ArrayList<>();
+                Arrays.stream(defaultListModel.toArray()).forEach(element -> updatedShapes.add((Shape) element));
+                try {
+                    shapeStoreFile.WriteToFile(updatedShapes);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            });
+
+            circleDialog.setVisible(true);
+        });
+
+        createSquareButton.addActionListener(e -> {
+            SquareDialog squareDialog = new SquareDialog(shape -> {
+                defaultListModel.addElement(shape);
+
+                List<Shape> updatedShapes = new ArrayList<>();
+                Arrays.stream(defaultListModel.toArray()).forEach(element -> updatedShapes.add((Shape) element));
+                try {
+                    shapeStoreFile.WriteToFile(updatedShapes);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            });
+
+            squareDialog.setVisible(true);
+        });
+
+        createRectangleButton.addActionListener(e -> {
+            RectangleDialog rectangleDialog = new RectangleDialog(shape -> {
+                defaultListModel.addElement(shape);
+
+                List<Shape> updatedShapes = new ArrayList<>();
+                Arrays.stream(defaultListModel.toArray()).forEach(element -> updatedShapes.add((Shape) element));
+                try {
+                    shapeStoreFile.WriteToFile(updatedShapes);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            });
+
+            rectangleDialog.setVisible(true);
+        });
+
+        createTriangleButton.addActionListener(e -> {
+            TriangleDialog triangleDialog = new TriangleDialog(shape -> {
+                defaultListModel.addElement(shape);
+
+                List<Shape> updatedShapes = new ArrayList<>();
+                Arrays.stream(defaultListModel.toArray()).forEach(element -> updatedShapes.add((Shape) element));
+                try {
+                    shapeStoreFile.WriteToFile(updatedShapes);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
+            });
+
+            triangleDialog.setVisible(true);
+        });
+
 
         setVisible(true);
     }
