@@ -14,6 +14,18 @@ public class Triangle implements Shape {
         this.sideC = sideC;
     }
 
+    public double getSideA() {
+        return sideA;
+    }
+
+    public double getSideB() {
+        return sideB;
+    }
+
+    public double getSideC() {
+        return sideC;
+    }
+
     @Override
     public double calcArea() {
         double p = calcPerimeter() / 2;

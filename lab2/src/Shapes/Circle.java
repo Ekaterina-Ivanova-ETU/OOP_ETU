@@ -10,6 +10,10 @@ public class Circle implements Shape {
         this.radius = radius;
     }
 
+    public double getRadius() {
+        return radius;
+    }
+
     @Override
     public double calcArea() { return Math.PI * Math.pow(radius, 2); }
 
