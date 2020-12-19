@@ -26,13 +26,13 @@ public class Checking {
 
 
         System.out.println("Contacts containing \"a\":");
-        System.out.println(phonebook.find("a"));
-        System.out.println("Contacts containing \"44\":");
-        System.out.println(phonebook.find("44"));
-        System.out.println("Contacts containing \"Smih\":");
-        System.out.println(phonebook.find("Smih"));
+        phonebook.find("a").forEach(System.out::print);
+        System.out.println("\nContacts containing \"44\":");
+        phonebook.find("44").forEach(System.out::print);
+        System.out.println("\nContacts containing \"Smih\":");
+        phonebook.find("Smih").forEach(System.out::print);
 
-        System.out.println("Contact with the index \"0\":");
+        System.out.println("\nContact with the index \"0\":");
         System.out.println(phonebook.getContact(0));
 
 
